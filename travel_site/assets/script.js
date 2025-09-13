@@ -1,22 +1,36 @@
 // ==================== 数据定义区域 ====================
 // 目的地数据
 const destinations = [
-  { id: 1, name: '成都', country: '中国', days: 4, cover: 'travel_site/assets/images/other_images/d1.png' },
-  { id: 2, name: '清迈', country: '泰国', days: 5, cover: 'travel_site/assets/images/other_images/d2.png' },
-  { id: 3, name: '首尔', country: '韩国', days: 4, cover: 'travel_site/assets/images/other_images/d3.jpg' },
-  { id: 4, name: '北海道', country: '日本', days: 6, cover: 'travel_site/assets/images/other_images/d4.png' },
-  { id: 5, name: '巴厘岛', country: '印尼', days: 5, cover: 'travel_site/assets/images/other_images/d5.png' },
-  { id: 6, name: '土耳其', country: '土耳其', days: 7, cover: 'travel_site/assets/images/other_images/d6.png' }
+  { id: 1, name: '成都', country: '中国', days: 4, cover: 'assets/images/other_images/d1.png' },
+  { id: 2, name: '清迈', country: '泰国', days: 5, cover: 'assets/images/other_images/d2.png' },
+  { id: 3, name: '首尔', country: '韩国', days: 4, cover: 'assets/images/other_images/d3.jpg' },
+  { id: 4, name: '北海道', country: '日本', days: 6, cover: 'assets/images/other_images/d4.png' },
+  { id: 5, name: '巴厘岛', country: '印尼', days: 5, cover: 'assets/images/other_images/d5.png' },
+  { id: 6, name: '土耳其', country: '土耳其', days: 7, cover: 'assets/images/other_images/d6.png' }
 ]
 
 // 特惠套餐数据
 const deals = [
-  { id: 'd1', title: '大阪5日自由行', price: 2999, cover: 'travel_site/assets/images/other_images/t1.png' },
-  { id: 'd2', title: '新加坡3晚机酒', price: 2599, cover: 'travel_site/assets/images/other_images/t2.png' },
-  { id: 'd3', title: '新疆环线8日小团', price: 5899, cover: 'travel_site/assets/images/other_images/t3.png' }
+  { id: 'd1', title: '大阪5日自由行', price: 2999, cover: 'assets/images/other_images/t1.png' },
+  { id: 'd2', title: '新加坡3晚机酒', price: 2599, cover: 'assets/images/other_images/t2.png' },
+  { id: 'd3', title: '新疆环线8日小团', price: 5899, cover: 'assets/images/other_images/t3.png' }
 ]
 
 // ==================== 工具函数区域 ====================
+// 获取正确的资源路径
+function getAssetPath(path) {
+  // 检查当前页面是否在子目录中
+  const isInSubDir = window.location.pathname.includes('/destinations/') || 
+                     window.location.pathname.includes('/pages/') ||
+                     window.location.pathname.includes('/guides/')
+  
+  if (isInSubDir) {
+    return `../${path}`
+  } else {
+    return `travel_site/${path}`
+  }
+}
+
 // 节流函数
 function throttle(fn, wait){
   let last = 0
@@ -46,7 +60,8 @@ const fallbackDataUri = `data:image/svg+xml;charset=UTF-8,${fallbackSvg}`
 
 // 生成图片标签
 function imageTag(src, alt){
-  return `<img loading="lazy" decoding="async" src="${src}" alt="${alt}"
+  const correctSrc = getAssetPath(src)
+  return `<img loading="lazy" decoding="async" src="${correctSrc}" alt="${alt}"
     onerror="this.onerror=null;this.src='${fallbackDataUri}'">`
 }
 
@@ -85,6 +100,9 @@ function renderDestinations(list){
     article.appendChild(body)
     
     article.addEventListener('click', () => {
+      const isInSubDir = window.location.pathname.includes('/destinations/') || 
+                         window.location.pathname.includes('/pages/') ||
+                         window.location.pathname.includes('/guides/')
       window.location.href = `${isInSubDir ? '../' : 'travel_site/'}destinations/destination.html?id=${item.id}&name=${encodeURIComponent(item.name)}`
     })
     
@@ -232,9 +250,9 @@ function setupHeroSlideshow(){
   
   // 轮播图片数组
   const images = [
-    `travel_site/assets/images/other_images/b1.png`,
-    `travel_site/assets/images/other_images/b2.png`,
-    `travel_site/assets/images/other_images/b3.png`
+    getAssetPath('assets/images/other_images/b1.png'),
+    getAssetPath('assets/images/other_images/b2.png'),
+    getAssetPath('assets/images/other_images/b3.png')
   ]
   let idx = 0  // 当前图片索引
   let showingFirst = true  // 当前显示的是第一个背景容器
@@ -305,7 +323,10 @@ function setupSearch(){
     e.preventDefault()  
     const q = input.value.trim()  // 获取搜索关键词
     // 跳转到目的地列表页面并携带搜索参数
-    location.href = `travel_site/destinations/destinations.html?q=${encodeURIComponent(q)}`
+    const isInSubDir = window.location.pathname.includes('/destinations/') || 
+                       window.location.pathname.includes('/pages/') ||
+                       window.location.pathname.includes('/guides/')
+    location.href = `${isInSubDir ? '../' : 'travel_site/'}destinations/destinations.html?q=${encodeURIComponent(q)}`
   })
 }
 
@@ -371,7 +392,10 @@ function setupHotwords(){
     if(word === '巴厘岛') {
       const baliDestination = destinations.find(d => d.name === '巴厘岛')
       if(baliDestination) {
-        location.href = `travel_site/destinations/destination.html?id=${baliDestination.id}&name=${encodeURIComponent(baliDestination.name)}`
+        const isInSubDir = window.location.pathname.includes('/destinations/') || 
+                           window.location.pathname.includes('/pages/') ||
+                           window.location.pathname.includes('/guides/')
+        location.href = `${isInSubDir ? '../' : 'travel_site/'}destinations/destination.html?id=${baliDestination.id}&name=${encodeURIComponent(baliDestination.name)}`
         return
       }
     }
@@ -380,13 +404,20 @@ function setupHotwords(){
     if(word === '成都') {
       const chengduDestination = destinations.find(d => d.name === '成都')
       if(chengduDestination) {
-        location.href = `travel_site/destinations/destination.html?id=${chengduDestination.id}&name=${encodeURIComponent(chengduDestination.name)}`
+        const isInSubDir = window.location.pathname.includes('/destinations/') || 
+                           window.location.pathname.includes('/pages/') ||
+                           window.location.pathname.includes('/guides/')
+        location.href = `${isInSubDir ? '../' : 'travel_site/'}destinations/destination.html?id=${chengduDestination.id}&name=${encodeURIComponent(chengduDestination.name)}`
         return
       }
     }
     
     // 根据热词类型决定跳转目标
-    const target = hotwordRoutes[word] || (isDestination ? 'travel_site/destinations/destinations.html' : 'travel_site/destinations/destinations.html')
+    const isInSubDir = window.location.pathname.includes('/destinations/') || 
+                       window.location.pathname.includes('/pages/') ||
+                       window.location.pathname.includes('/guides/')
+    const basePath = isInSubDir ? '../' : 'travel_site/'
+    const target = hotwordRoutes[word] || (isDestination ? `${basePath}destinations/destinations.html` : `${basePath}destinations/destinations.html`)
     location.href = `${target}?q=${encodeURIComponent(word)}`  // 跳转并携带搜索参数
   })
 }
@@ -1240,7 +1271,7 @@ function setupDestinationDetail(){
         <h1>${destination.name}</h1>
         <p>探索${destination.name}的精彩体验，发现美食、购物和旅行故事</p>
       </div>
-      <img src="../${destination.cover}" alt="${destination.name}" class="destination-image" loading="lazy">
+      <img src="${getAssetPath(destination.cover)}" alt="${destination.name}" class="destination-image" loading="lazy">
   `
   
   // 如果是巴厘岛，添加特色卡片
