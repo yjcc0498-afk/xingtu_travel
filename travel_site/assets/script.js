@@ -30,16 +30,16 @@ function throttle(fn, wait){
 }
 
 // 图片加载失败占位符
-const fallbackSvg = encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'>
+const fallbackSvg = encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800">
   <defs>
-    <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
-      <stop offset='0%' stop-color='#1e293b'/>
-      <stop offset='100%' stop-color='#0b0f19'/>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0b0f19"/>
     </linearGradient>
   </defs>
-  <rect width='100%' height='100%' fill='url(#g)'/>
-  <g fill='#9aa5b1' font-family='sans-serif' font-size='36'>
-    <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'>图片加载失败</text>
+  <rect width="100%" height="100%" fill="url(#g)"/>
+  <g fill="#9aa5b1" font-family="sans-serif" font-size="36">
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">图片加载失败</text>
   </g>
 </svg>`)
 const fallbackDataUri = `data:image/svg+xml;charset=UTF-8,${fallbackSvg}`
@@ -58,7 +58,7 @@ function renderDestinations(list){
   
   // 根据当前页面位置调整图片路径
   const isInSubDir = window.location.pathname.includes('/destinations/') || window.location.pathname.includes('/pages/')
-  const isInRoot = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html')
+  const isInRoot = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') || window.location.pathname.includes('/xingtu_travel/')
   const imagePathPrefix = isInSubDir ? '../' : (isInRoot ? 'travel_site/' : '')
   
   grid.innerHTML = ''
@@ -117,7 +117,7 @@ function renderDeals(){
   
   // 根据当前页面位置调整图片路径
   const isInSubDir = window.location.pathname.includes('/destinations/') || window.location.pathname.includes('/pages/')
-  const isInRoot = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html')
+  const isInRoot = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') || window.location.pathname.includes('/xingtu_travel/')
   const imagePathPrefix = isInSubDir ? '../' : (isInRoot ? 'travel_site/' : '')
   
   grid.innerHTML = ''
@@ -242,7 +242,7 @@ function setupHeroSlideshow(){
   
   // 根据当前页面位置调整图片路径（处理不同目录层级）
   const isInSubDir = window.location.pathname.includes('/destinations/') || window.location.pathname.includes('/pages/')
-  const isInRoot = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html')
+  const isInRoot = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') || window.location.pathname.includes('/xingtu_travel/')
   const imagePathPrefix = isInSubDir ? '../' : (isInRoot ? 'travel_site/' : '')
   
   // 轮播图片数组
