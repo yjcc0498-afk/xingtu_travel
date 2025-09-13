@@ -1,19 +1,19 @@
 // ==================== 数据定义区域 ====================
 // 目的地数据
 const destinations = [
-  { id: 1, name: '成都', country: '中国', days: 4, cover: 'assets/images/other_images/d1.png' },
-  { id: 2, name: '清迈', country: '泰国', days: 5, cover: 'assets/images/other_images/d2.png' },
-  { id: 3, name: '首尔', country: '韩国', days: 4, cover: 'assets/images/other_images/d3.jpg' },
-  { id: 4, name: '北海道', country: '日本', days: 6, cover: 'assets/images/other_images/d4.png' },
-  { id: 5, name: '巴厘岛', country: '印尼', days: 5, cover: 'assets/images/other_images/d5.png' },
-  { id: 6, name: '土耳其', country: '土耳其', days: 7, cover: 'assets/images/other_images/d6.png' }
+  { id: 1, name: '成都', country: '中国', days: 4, cover: 'travel_site/assets/images/other_images/d1.png' },
+  { id: 2, name: '清迈', country: '泰国', days: 5, cover: 'travel_site/assets/images/other_images/d2.png' },
+  { id: 3, name: '首尔', country: '韩国', days: 4, cover: 'travel_site/assets/images/other_images/d3.jpg' },
+  { id: 4, name: '北海道', country: '日本', days: 6, cover: 'travel_site/assets/images/other_images/d4.png' },
+  { id: 5, name: '巴厘岛', country: '印尼', days: 5, cover: 'travel_site/assets/images/other_images/d5.png' },
+  { id: 6, name: '土耳其', country: '土耳其', days: 7, cover: 'travel_site/assets/images/other_images/d6.png' }
 ]
 
 // 特惠套餐数据
 const deals = [
-  { id: 'd1', title: '大阪5日自由行', price: 2999, cover: 'assets/images/other_images/t1.png' },
-  { id: 'd2', title: '新加坡3晚机酒', price: 2599, cover: 'assets/images/other_images/t2.png' },
-  { id: 'd3', title: '新疆环线8日小团', price: 5899, cover: 'assets/images/other_images/t3.png' }
+  { id: 'd1', title: '大阪5日自由行', price: 2999, cover: 'travel_site/assets/images/other_images/t1.png' },
+  { id: 'd2', title: '新加坡3晚机酒', price: 2599, cover: 'travel_site/assets/images/other_images/t2.png' },
+  { id: 'd3', title: '新疆环线8日小团', price: 5899, cover: 'travel_site/assets/images/other_images/t3.png' }
 ]
 
 // ==================== 工具函数区域 ====================
@@ -56,11 +56,6 @@ function renderDestinations(list){
   const grid = document.querySelector('#destinationGrid')
   if (!grid) return
   
-  // 根据当前页面位置调整图片路径
-  const isInSubDir = window.location.pathname.includes('/destinations/') || window.location.pathname.includes('/pages/')
-  const isInRoot = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') || window.location.pathname.includes('/xingtu_travel/')
-  const imagePathPrefix = isInSubDir ? '../' : (isInRoot ? 'travel_site/' : '')
-  
   grid.innerHTML = ''
   
   list.forEach(item => {
@@ -70,7 +65,7 @@ function renderDestinations(list){
     
     const media = document.createElement('div')
     media.className = 'media'
-    media.innerHTML = imageTag(imagePathPrefix + item.cover, item.name)
+    media.innerHTML = imageTag(item.cover, item.name)
     
     const body = document.createElement('div')
     body.className = 'body'
@@ -115,11 +110,6 @@ function renderDeals(){
     return;
   }
   
-  // 根据当前页面位置调整图片路径
-  const isInSubDir = window.location.pathname.includes('/destinations/') || window.location.pathname.includes('/pages/')
-  const isInRoot = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') || window.location.pathname.includes('/xingtu_travel/')
-  const imagePathPrefix = isInSubDir ? '../' : (isInRoot ? 'travel_site/' : '')
-  
   grid.innerHTML = ''
   
   deals.forEach(deal => {
@@ -129,7 +119,7 @@ function renderDeals(){
     
     const media = document.createElement('div')
     media.className = 'media'
-    media.innerHTML = imageTag(imagePathPrefix + deal.cover, deal.title)
+    media.innerHTML = imageTag(deal.cover, deal.title)
     
     const body = document.createElement('div')
     body.className = 'body'
@@ -240,16 +230,11 @@ function setupHeroSlideshow(){
   const bg2 = document.getElementById('heroBg2')  
   if(!bg1 || !bg2) return  // 如果容器不存在则返回
   
-  // 根据当前页面位置调整图片路径（处理不同目录层级）
-  const isInSubDir = window.location.pathname.includes('/destinations/') || window.location.pathname.includes('/pages/')
-  const isInRoot = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') || window.location.pathname.includes('/xingtu_travel/')
-  const imagePathPrefix = isInSubDir ? '../' : (isInRoot ? 'travel_site/' : '')
-  
   // 轮播图片数组
   const images = [
-    `${imagePathPrefix}assets/images/other_images/b1.png`,
-    `${imagePathPrefix}assets/images/other_images/b2.png`,
-    `${imagePathPrefix}assets/images/other_images/b3.png`
+    `travel_site/assets/images/other_images/b1.png`,
+    `travel_site/assets/images/other_images/b2.png`,
+    `travel_site/assets/images/other_images/b3.png`
   ]
   let idx = 0  // 当前图片索引
   let showingFirst = true  // 当前显示的是第一个背景容器
