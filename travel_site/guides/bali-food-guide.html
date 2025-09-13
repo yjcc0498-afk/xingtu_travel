@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴厘岛美食指南</title>
+    <style>
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 900px; /* 增加宽度以容纳图片 */
+            margin: 0 auto;
+            background: linear-gradient(135deg, #e8f5e9, #fff3e0);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* 图片和文本间距 */
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #27ae60;
+        }
+
+        h1 {
+            color: #e74c3c;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .food-section {
+            flex: 1;
+            min-width: 300px; /* 确保响应式 */
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .food-image {
+            flex: 0 0 40%; /* 图片占 40% 宽度 */
+            margin-right: 20px;
+        }
+
+        .food-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .food-content {
+            flex: 1;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <a href="javascript:history.back()" class="back-button">返回</a>
+    <div class="container">
+        <h1>巴厘岛美食指南</h1>
+        <div class="food-section">
+            <div class="food-image">
+                <img src="../assets/images/food_images/bali_kaochur.jpg" alt="烤猪肉">
+            </div>
+            <div class="food-content">
+                <p>巴厘岛的美食文化深受其丰富的香料传统和印度尼西亚多元文化影响，融合了当地风味与自然食材。以下是几种代表性美食：</p>
+                <ul>
+                    <li><strong>烤猪肉 (Babi Guling)</strong>：整头猪用香料腌制后烤制，皮脆肉嫩，搭配米饭和辣酱，是节日和庆典的经典菜肴。</li>
+                    <li><strong>椰子汤 (Lawar)</strong>：由猪肉、椰子、香料和蔬菜混合制成，口感丰富，常见于传统宴会。</li>
+                    <li><strong>萨泰 (Sate Lilit)</strong>：用鱼或鸡肉制成的香料串烧，裹上椰丝，烤制后香气扑鼻。</li>
+                    <li><strong>海鲜料理</strong>：巴厘岛沿海地区以新鲜海鲜为主，搭配椰奶和辣椒酱，味道鲜美。</li>
+                </ul>
+            </div>
+        </div>
+        <div class="food-section">
+            <div class="food-image">
+                <img src="../assets/images/food_images/bali_yezit.bng.webp" alt="椰子汤">
+            </div>
+            <div class="food-content">
+                <p>这些美食通常在当地 Warung（小餐馆）或夜市中能找到，建议搭配当地饮料如椰汁或咖啡，体验正宗风味。巴厘岛的饮食文化还受到宗教仪式影响，许多菜肴在寺庙庆典中备受欢迎。</p>
+                <p>更多信息请访问 <a href="https://www.baliguide.com/food-guide-bali" target="_blank">巴厘岛官方美食指南</a>。</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

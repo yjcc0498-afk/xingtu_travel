@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>特惠套餐 - 心途旅行</title>
+	<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body data-page="deals">
+	<header class="site-header">
+		<div class="container header-inner">
+			<a href="../index.html" class="logo">心途旅行</a>
+			<nav class="nav" aria-label="主导航">
+				<button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="打开菜单">
+					<span class="bar"></span><span class="bar"></span><span class="bar"></span>
+				</button>
+				<ul id="navMenu" class="nav-menu">
+					<li><a href="../destinations/destinations.html">目的地</a></li>
+					<li><a href="deals.html">特惠套餐</a></li>
+					<li><a href="stories.html">旅行故事</a></li>
+					<li><a href="about.html">关于我们</a></li>
+					<li><a href="contact.html">联系我们</a></li>
+					<li><a href="favorites.html">收藏</a></li>
+					<li><a href="orders.html">订单</a></li>
+					<li><a href="login.html" id="authLink">登录</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main class="section">
+		<div class="container">
+			<header class="section-header">
+				<h2>特惠套餐</h2>
+				<p>机酒自由配，轻松省更多。</p>
+			</header>
+			<div class="grid deals" id="dealGrid">
+				<div style="background: #f0f0f0; padding: 20px; text-align: center;">
+					<p>正在加载特惠套餐...</p>
+					<p>如果看到这个内容，说明页面结构正常</p>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer class="site-footer">
+		<div class="container bottom">
+			<p>© <span id="year"></span> 心途旅行</p>
+		</div>
+	</footer>
+
+	<script src="../assets/script.js"></script>
+	<script>
+		// 调试信息
+		console.log('Deals页面加载完成');
+		console.log('页面类型:', document.body.dataset.page);
+		console.log('dealGrid元素:', document.getElementById('dealGrid'));
+		console.log('deals数据:', typeof deals !== 'undefined' ? deals : '未定义');
+		
+		// 确保页面加载后执行
+		document.addEventListener('DOMContentLoaded', () => {
+			console.log('DOMContentLoaded事件触发');
+			console.log('当前页面:', document.body.dataset.page);
+		});
+	</script>
+</body>
+</html>
+
+

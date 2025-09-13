@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>热门目的地 - 心途旅行</title>
+	<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body data-page="destinations">
+	<header class="site-header">
+		<div class="container header-inner">
+			<a href="../../index.html" class="logo">心途旅行</a>
+			<nav class="nav" aria-label="主导航">
+				<button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="打开菜单">
+					<span class="bar"></span><span class="bar"></span><span class="bar"></span>
+				</button>
+				<ul id="navMenu" class="nav-menu">
+					<li><a href="destinations.html">目的地</a></li>
+					<li><a href="../pages/deals.html">特惠套餐</a></li>
+					<li><a href="../pages/stories.html">旅行故事</a></li>
+					<li><a href="../pages/about.html">关于我们</a></li>
+					<li><a href="../pages/contact.html">联系我们</a></li>
+					<li><a href="../pages/favorites.html">收藏</a></li>
+					<li><a href="../pages/orders.html">订单</a></li>
+					<li><a href="../pages/profile.html" id="profileLink" style="display:none">个人中心</a></li>
+					<li><a href="../pages/login.html" id="authLink">登录</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main class="section">
+		<div class="container">
+			<header class="section-header">
+				<h2>热门目的地</h2>
+				<p>筛选并收藏你感兴趣的地方。</p>
+				<form class="search" id="searchForm" role="search">
+					<input type="text" id="keyword" placeholder="搜索目的地/国家">
+					<button type="submit">搜索</button>
+				</form>
+				<p class="search-hint" id="searchHint"></p>
+			</header>
+			<div class="grid cards" id="destinationGrid"></div>
+		</div>
+	</main>
+
+	<footer class="site-footer">
+		<div class="container bottom">
+			<p>© <span id="year"></span> 心途旅行</p>
+		</div>
+	</footer>
+
+	<script src="../assets/script.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成都美食指南</title>
+    <style>
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #e8f5e9, #fff3e0);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #c0392b;
+        }
+
+        h1 {
+            color: #e74c3c;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .food-section {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .food-image {
+            flex: 0 0 40%;
+            margin-right: 20px;
+        }
+
+        .food-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .food-content {
+            flex: 1;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <a href="javascript:history.back()" class="back-button">返回</a>
+    <div class="container">
+        <h1>成都美食指南</h1>
+        <div class="food-section">
+            <div class="food-image">
+                <img src="../assets/images/food_images/hot_pot.jpg" alt="成都火锅">
+            </div>
+            <div class="food-content">
+                <p>成都作为"天府之国"的美食之都，以麻辣鲜香著称，是川菜的发源地。以下是成都最具代表性的美食：</p>
+                <ul>
+                    <li><strong>成都火锅</strong>：麻辣鲜香，以牛油锅底和清油锅底为主，配菜丰富，是成都人最爱的聚餐方式。</li>
+                    <li><strong>麻婆豆腐</strong>：经典川菜，豆腐嫩滑，麻辣鲜香，是川菜的代表作之一。</li>
+                    <li><strong>担担面</strong>：成都传统小吃，面条劲道，调料丰富，麻辣开胃。</li>
+                    <li><strong>钟水饺</strong>：成都传统名点，皮薄馅嫩，汤汁鲜美，是成都人早餐的首选。</li>
+                </ul>
+            </div>
+        </div>
+        <div class="food-section">
+            <div class="food-image">
+                <img src="../assets/images/food_images/kinds_food.jpg" alt="成都小吃">
+            </div>
+            <div class="food-content">
+                <p>成都的小吃文化同样丰富多彩，从春熙路到宽窄巷子，从锦里到建设路，每个地方都有独特的美食体验。建议品尝当地特色小吃，感受成都的慢生活文化。</p>
+                <p>更多信息请访问 <a href="https://www.chengdu.cn/food" target="_blank">成都官方美食指南</a>。</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

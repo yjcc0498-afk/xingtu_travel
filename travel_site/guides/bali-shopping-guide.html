@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴厘岛购物指南</title>
+    <style>
+        body {
+            background-color: #f4e4bc;
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #f9e7b9, #d5a65e);
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 12px 25px;
+            background-color: #d4a017;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #b8860b;
+            transform: translateX(-5px);
+        }
+
+        h1 {
+            color: #8b4513;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 30px;
+            font-size: 34px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .shopping-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .shopping-section:hover {
+            transform: scale(1.02);
+        }
+
+        .shopping-image {
+            margin-bottom: 15px;
+        }
+
+        .shopping-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .shopping-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .shopping-content {
+            padding: 0 10px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        a {
+            color: #d4a017;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #f4c430;
+        }
+    </style>
+</head>
+<body>
+    <a href="javascript:history.back()" class="back-button">返回</a>
+    <div class="container">
+        <h1>巴厘岛购物指南</h1>
+        <div class="shopping-section">
+            <div class="shopping-image">
+                <img src="../assets/images/shop_images/bali-tra1.png" alt="乌布艺术市场">
+            </div>
+            <div class="shopping-content">
+                <p>巴厘岛购物融合传统手工艺和现代商场，提供独特体验。以下是热门推荐：</p>
+                <ul>
+                    <li><strong>乌布艺术市场 (Ubud Art Market)</strong>：出售手工木雕、蜡染纺织品和银饰，世代传承的工艺品，适合买纪念品。</li>
+                    <li><strong>Beachwalk Shopping Center</strong>：位于库塔海滩，融合东南亚建筑，购物、餐饮一应俱全。</li>
+                </ul>
+            </div>
+        </div>
+        <div class="shopping-section">
+            <div class="shopping-image">
+                <img src="../assets/images/shop_images/bali-tra2.png" alt="Beachwalk商场">
+            </div>
+            <div class="shopping-content">
+                <p>巴厘岛购物最受欢迎的包括珠宝、香料和咖啡，通常在当地市场或免税店找到。建议砍价购物，体验文化互动。</p>
+                <p>更多信息请访问 <a href="https://www.agoda.com/zh-cn/travel-guides/indonesia/bali/bali-shopping-guide-5-most-popular-markets-and-luxury-malls/" target="_blank">巴厘岛购物指南</a>。</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

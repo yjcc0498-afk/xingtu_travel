@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成都旅游视频</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        
+        .header {
+            text-align: center;
+            position: relative;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 12px 25px;
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #fff;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .video-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .video-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .video-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .video-container:hover .video-overlay {
+            opacity: 1;
+        }
+        
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 20px solid #333;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 4px;
+        }
+        
+        .video-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #ffcc70;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+        }
+        
+        .video-card p {
+            font-size: 1rem;
+            margin: 10px 0;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .video-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .video-section {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="javascript:history.back()" class="back-button">返回</a>
+            <h1>成都旅游视频</h1>
+            <p class="subtitle">通过官方旅游短视频，感受成都的独特魅力和文化底蕴</p>
+        </div>
+        
+        <div class="video-section">
+            <div class="video-card">
+                <div class="video-container">
+                    <video controls preload="metadata">
+                        <source src="../assets/videos/chengdu_videos/d371934e9bc04e4ec8790372a443c9a8.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                    <div class="video-overlay">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <h3>成都城市宣传片</h3>
+                <p>探索成都这座千年古都的现代魅力，从宽窄巷子的传统建筑到春熙路的繁华商业，感受成都的独特韵味。</p>
+                <div class="video-info">
+                    <span>时长: 3:45</span>
+                    <span>观看次数: 125.6万</span>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <div class="video-container">
+                    <video controls preload="metadata">
+                        <source src="../assets/videos/chengdu_videos/c465be6b4d160de3479e317df6fe2997.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                    <div class="video-overlay">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <h3>成都美食文化</h3>
+                <p>深入了解成都的美食文化，从火锅到小吃，从传统川菜到现代创新，体验成都作为美食之都的魅力。</p>
+                <div class="video-info">
+                    <span>时长: 4:20</span>
+                    <span>观看次数: 89.3万</span>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <div class="video-container">
+                    <video controls preload="metadata">
+                        <source src="../assets/videos/chengdu_videos/fcaf8d8bd66ec2ffd5de6f4156ff8567.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                    <div class="video-overlay">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <h3>成都大熊猫基地</h3>
+                <p>走进成都大熊猫繁育研究基地，近距离观察国宝大熊猫的日常生活，了解保护工作的重要性。</p>
+                <div class="video-info">
+                    <span>时长: 5:15</span>
+                    <span>观看次数: 156.8万</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>视频来源：成都市旅游局官方频道</p>
+        </div>
+    </div>
+
+    <script>
+        // 视频加载调试和错误处理
+        document.addEventListener('DOMContentLoaded', function() {
+            const videos = document.querySelectorAll('video');
+            
+            videos.forEach((video, index) => {
+                // 添加加载事件监听
+                video.addEventListener('loadstart', function() {
+                    console.log(`视频 ${index + 1} 开始加载`);
+                });
+                
+                video.addEventListener('loadedmetadata', function() {
+                    console.log(`视频 ${index + 1} 元数据加载完成 - 时长: ${video.duration}秒`);
+                });
+                
+                video.addEventListener('canplay', function() {
+                    console.log(`视频 ${index + 1} 可以播放`);
+                });
+                
+                video.addEventListener('play', function() {
+                    console.log(`视频 ${index + 1} 开始播放`);
+                });
+                
+                video.addEventListener('pause', function() {
+                    console.log(`视频 ${index + 1} 暂停播放`);
+                });
+                
+                video.addEventListener('error', function(e) {
+                    console.error(`视频 ${index + 1} 加载错误:`, e);
+                    console.error('错误详情:', video.error);
+                    const errorDiv = document.createElement('div');
+                    errorDiv.style.cssText = `
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: rgba(0,0,0,0.8);
+                        color: white;
+                        padding: 20px;
+                        border-radius: 10px;
+                        text-align: center;
+                        z-index: 10;
+                    `;
+                    errorDiv.innerHTML = `
+                        <p>视频加载失败</p>
+                        <p>错误代码: ${video.error ? video.error.code : '未知'}</p>
+                        <button onclick="this.parentElement.remove()" style="margin-top: 10px; padding: 5px 10px;">关闭</button>
+                    `;
+                    video.parentElement.style.position = 'relative';
+                    video.parentElement.appendChild(errorDiv);
+                });
+                
+                // 强制加载视频
+                video.load();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<!-- 基础元数据设置 -->
+	<meta charset="UTF-8"> <!-- 设置字符编码为UTF-8，支持中文 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 响应式设计，适配移动端 -->
+	<title>心途旅行 - 探索世界，从此刻启程</title> <!-- 页面标题，显示在浏览器标签页 -->
+	<meta name="description" content="心途旅行：精选目的地、特价机酒、精品路线与个性化行程定制。"> <!-- SEO描述 -->
+	
+	<!-- 字体优化：预连接Google Fonts服务器，提升加载速度 -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<!-- 异步加载中文字体，避免阻塞页面渲染 -->
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
+	<noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"></noscript>
+	
+	<!-- 引入主样式文件 -->
+	<link rel="stylesheet" href="travel_site/assets/styles.css">
+	<!-- 预加载首屏关键图片，提升用户体验 -->
+	<link rel="preload" as="image" href="travel_site/assets/images/other_images/b1.png">
+</head>
+<body>
+	<!-- 网站头部导航区域 -->
+	<header class="site-header">
+		<div class="container header-inner">
+			<!-- 网站Logo，点击返回首页 -->
+			<a href="index.html" class="logo" aria-label="心途旅行首页">心途旅行</a>
+			
+			<!-- 主导航菜单 -->
+			<nav class="nav" aria-label="主导航">
+				<!-- 移动端菜单切换按钮（汉堡包图标） -->
+				<button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="打开菜单">
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</button>
+				
+				<!-- 导航菜单列表 -->
+				<ul id="navMenu" class="nav-menu">
+					<!-- 目的地页面链接，支持多语言 -->
+					<li><a href="travel_site/destinations/destinations.html" data-i18n="nav.destinations">目的地</a></li>
+					<!-- 特惠套餐页面链接 -->
+					<li><a href="travel_site/pages/deals.html" data-i18n="nav.deals">特惠套餐</a></li>
+					<!-- 旅行故事页面链接 -->
+					<li><a href="travel_site/pages/stories.html" data-i18n="nav.stories">旅行故事</a></li>
+					<!-- 关于我们页面链接 -->
+					<li><a href="travel_site/pages/about.html" data-i18n="nav.about">关于我们</a></li>
+					<!-- 联系我们页面链接 -->
+					<li><a href="travel_site/pages/contact.html" data-i18n="nav.contact">联系我们</a></li>
+					<!-- 收藏页面链接（需要登录） -->
+					<li><a href="travel_site/pages/favorites.html" data-i18n="nav.favorites">收藏</a></li>
+					<!-- 订单页面链接（需要登录） -->
+					<li><a href="travel_site/pages/orders.html" data-i18n="nav.orders">订单</a></li>
+					<!-- 个人中心页面链接（需要登录） -->
+					<li><a href="travel_site/pages/profile.html" id="profileLink" data-i18n="nav.profile" style="display:none">个人中心</a></li>
+					<!-- 登录/用户信息链接（动态显示） -->
+					<li><a href="travel_site/pages/login.html" id="authLink" data-i18n="nav.login">登录</a></li>
+					
+					<!-- 语言切换下拉框 -->
+					<li class="lang-switch">
+						<label class="sr-only" for="langSelect">Language</label>
+						<select id="langSelect" aria-label="Language">
+							<option value="zh-CN">中文</option>
+							<option value="en">English</option>
+						</select>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<!-- 首页主横幅区域（Hero Section） -->
+	<section class="hero" id="home" role="banner">
+		<!-- 背景图片轮播容器（两张图片交替显示实现无缝轮播） -->
+		<div class="hero-bg" id="heroBg1" aria-hidden="true"></div>
+		<div class="hero-bg" id="heroBg2" aria-hidden="true"></div>
+		<!-- 背景遮罩层，增强文字可读性 -->
+		<div class="overlay"></div>
+		
+		<!-- 主横幅内容区域 -->
+		<div class="container hero-content">
+			<!-- 主标题 -->
+			<h1>探索世界，从此刻启程</h1>
+			<!-- 副标题描述 -->
+			<p>发现城市与自然的灵感目的地，享受无忧旅程。</p>
+			
+			<!-- 搜索表单 -->
+			<form class="search" id="searchForm" role="search" aria-label="搜索行程">
+				<label class="sr-only" for="keyword">搜索</label>
+				<input type="text" id="keyword" name="keyword" placeholder="搜索目的地/主题，如：济州岛、亲子游" autocomplete="off">
+				<button type="submit">搜索</button>
+			</form>
+			
+			<!-- 热门搜索词跑马灯 -->
+			<div class="hotwords" id="hotwordsMarquee" aria-label="热门搜索">
+				<div class="track" id="hotwordsTrack"></div>
+			</div>
+			
+			<!-- 搜索提示信息（动态显示搜索结果数量） -->
+			<p class="search-hint" id="searchHint" aria-live="polite"></p>
+			
+			<!-- 背景轮播指示点 -->
+			<div class="hero-dots" id="heroDots" role="tablist" aria-label="轮播指示"></div>
+		</div>
+	</section>
+
+	<!-- 主要内容区域 -->
+	<main>
+		<!-- 热门目的地展示区域 -->
+		<section class="destinations section" id="destinations">
+			<div class="container">
+				<!-- 区域标题和描述 -->
+				<header class="section-header">
+					<h2 data-i18n="home.destinations.title">热门目的地</h2>
+					<p data-i18n="home.destinations.subtitle">用镜头记录世界的颜色，用脚步丈量风景的温度。</p>
+				</header>
+				<!-- 目的地卡片网格容器（由JavaScript动态填充） -->
+				<div class="grid cards" id="destinationGrid" aria-live="polite">
+					<!-- 动态注入卡片 -->
+				</div>
+			</div>
+		</section>
+
+		<!-- 特惠套餐展示区域 -->
+		<section class="packages section alt" id="packages">
+			<div class="container">
+				<!-- 区域标题和描述 -->
+				<header class="section-header">
+					<h2 data-i18n="home.deals.title">特惠套餐</h2>
+					<p data-i18n="home.deals.subtitle">机酒自由配，轻松省更多。</p>
+				</header>
+				<!-- 套餐卡片网格容器（由JavaScript动态填充） -->
+				<div class="grid deals" id="dealGrid">
+					<!-- 动态注入套餐 -->
+				</div>
+			</div>
+		</section>
+
+		<!-- 旅行故事展示区域 -->
+		<section class="stories section" id="stories">
+			<div class="container">
+				<!-- 区域标题和描述 -->
+				<header class="section-header">
+					<h2 data-i18n="home.stories.title">旅行故事</h2>
+					<p data-i18n="home.stories.subtitle">一千个人有一千个远方，分享你的足迹。</p>
+				</header>
+				<!-- 静态故事文章示例 -->
+				<article class="story">
+					<h3>在清迈遇见慢生活</h3>
+					<p>沿着古城墙骑行，夜市里烟火升腾，咖啡店里时光缓慢......</p>
+				</article>
+				<article class="story">
+					<h3>冰岛环岛的七日</h3>
+					<p>冰川、黑沙滩与极光，像进入了地球的另一面。</p>
+				</article>
+			</div>
+		</section>
+	</main>
+
+	<!-- 网站页脚区域 -->
+	<footer class="site-footer" id="contact">
+		<!-- 页脚主要内容网格 -->
+		<div class="container footer-grid">
+			<!-- 关于我们信息 -->
+			<section>
+				<h4 data-i18n="footer.about.title">关于我们</h4>
+				<p data-i18n="footer.about.desc">心途旅行专注于高品质旅行体验与个性化路线定制。</p>
+			</section>
+			
+			<!-- 联系信息 -->
+			<section>
+				<h4 data-i18n="footer.contact.title">联系信息</h4>
+				<ul class="contact-list">
+					<li data-i18n="footer.contact.phone">客服热线：400-888-0000</li>
+					<li data-i18n="footer.contact.email">邮箱：support@xintutravel.com</li>
+					<li data-i18n="footer.contact.hours">工作时间：周一至周日 9:00-21:00</li>
+				</ul>
+			</section>
+			
+			<!-- 邮件订阅表单 -->
+			<section>
+				<h4 data-i18n="footer.subscribe.title">订阅资讯</h4>
+				<form id="subscribeForm" class="subscribe" novalidate>
+					<label class="sr-only" for="email" data-i18n="footer.subscribe.emailLabel">邮箱</label>
+					<input id="email" name="email" type="email" data-i18n-placeholder="footer.subscribe.placeholder" placeholder="输入邮箱，获取特价与攻略">
+					<button type="submit" data-i18n="footer.subscribe.button">订阅</button>
+					<!-- 表单提交反馈信息 -->
+					<p class="form-msg" id="subscribeMsg" aria-live="polite"></p>
+				</form>
+			</section>
+		</div>
+		
+		<!-- 版权信息区域 -->
+		<div class="container bottom">
+			<p>© <span id="year"></span> <span data-i18n="footer.copy.brand">心途旅行</span> · <span data-i18n="footer.copy.rights">All rights reserved.</span></p>
+		</div>
+	</footer>
+
+	<!-- 引入主JavaScript文件，实现所有交互功能 -->
+	<script src="travel_site/assets/script.js"></script>
+</body>
+</html>
+
+

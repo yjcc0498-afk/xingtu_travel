@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>联系我们 - 心途旅行</title>
+	<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+	<header class="site-header">
+		<div class="container header-inner">
+			<a href="../index.html" class="logo">心途旅行</a>
+			<nav class="nav" aria-label="主导航">
+				<button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="打开菜单">
+					<span class="bar"></span><span class="bar"></span><span class="bar"></span>
+				</button>
+				<ul id="navMenu" class="nav-menu">
+					<li><a href="../destinations/destinations.html">目的地</a></li>
+					<li><a href="deals.html">特惠套餐</a></li>
+					<li><a href="stories.html">旅行故事</a></li>
+					<li><a href="about.html">关于我们</a></li>
+					<li><a href="contact.html">联系我们</a></li>
+					<li><a href="favorites.html">收藏</a></li>
+					<li><a href="orders.html">订单</a></li>
+					<li><a href="login.html" id="authLink">登录</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main class="section">
+		<div class="container">
+			<header class="section-header">
+				<h2>联系我们</h2>
+				<p>留下您的需求，我们会尽快联系您。</p>
+			</header>
+			<form id="contactForm" class="subscribe" novalidate>
+				<input id="cname" placeholder="姓名" required>
+				<input id="cemail" placeholder="邮箱" type="email" required>
+				<input id="ctext" placeholder="留言" required>
+				<button type="submit">发送</button>
+				<p class="form-msg" id="contactMsg"></p>
+			</form>
+		</div>
+	</main>
+
+	<footer class="site-footer">
+		<div class="container bottom">
+			<p>© <span id="year"></span> 心途旅行</p>
+		</div>
+	</footer>
+
+	<script src="../assets/script.js"></script>
+</body>
+</html>
+
+

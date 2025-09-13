@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴厘岛游记与评价</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        
+        .header {
+            text-align: center;
+            position: relative;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 12px 25px;
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #fff;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .chart-section {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chart-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .chart-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #ffcc70;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        canvas {
+            max-width: 100%;
+            height: 100%;
+        }
+        
+        .review-section {
+            flex: 1;
+            min-width: 300px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .review-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .review-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .review-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #ffcc70;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+        }
+        
+        .review-card p {
+            font-size: 1rem;
+            margin: 10px 0;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .rating-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffcc70;
+            margin-right: 10px;
+        }
+        
+        .stars {
+            display: flex;
+        }
+        
+        .star {
+            color: #ffcc70;
+            font-size: 1.2rem;
+            margin-right: 3px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="javascript:history.back()" class="back-button">返回</a>
+            <h1>巴厘岛游记与评价</h1>
+            <p class="subtitle">探索巴厘岛最受欢迎的景点，了解游客的真实评价，规划您的完美旅程</p>
+        </div>
+        
+        <div class="content">
+            <div class="chart-section">
+                <div class="chart-header">
+                    <h2>景点受欢迎程度</h2>
+                    <p>基于游客投票数据统计</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="myChart" width="500" height="400"></canvas>
+                </div>
+            </div>
+            
+            <div class="review-section">
+                <div class="review-card">
+                    <h3>海神庙</h3>
+                    <p>游客评价：风景绝美，海上日落令人难忘，但潮汐时无法靠近，建议查好时间。</p>
+                    <div class="rating">
+                        <span class="rating-value">4.5/5</span>
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">☆</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <h3>乌布猴林</h3>
+                    <p>游客评价：猴子可爱，环境清幽，注意保管好物品以防被抢。</p>
+                    <div class="rating">
+                        <span class="rating-value">4.2/5</span>
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">☆</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <h3>金巴兰海滩</h3>
+                    <p>游客评价：海鲜烧烤美味，沙滩放松惬意，晚上很热闹。</p>
+                    <div class="rating">
+                        <span class="rating-value">4.0/5</span>
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">☆</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <h3>特加拉朗梯田</h3>
+                    <p>游客评价：绿意盎然，拍照绝佳，步行稍累但值得一游。</p>
+                    <div class="rating">
+                        <span class="rating-value">4.3/5</span>
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">☆</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>数据来源：2023年巴厘岛游客调查 | 更新时间：2023年12月</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('myChart');
+            const ctx = canvas.getContext('2d');
+            
+            // 数据：海神庙 (35%)、乌布猴林 (30%)、金巴兰海滩 (20%)、特加拉朗梯田 (15%)
+            const data = [35, 30, 20, 15];
+            const labels = ['海神庙', '乌布猴林', '金巴兰海滩', '特加拉朗梯田'];
+            const colors = [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 206, 86, 0.7)',
+                'rgba(75, 192, 192, 0.7)'
+            ];
+            const borderColors = [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)'
+            ];
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(centerX, centerY) * 0.7;
+            let startAngle = -Math.PI / 2; // 从顶部开始
+            
+            // 绘制饼图
+            function drawPieChart() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 绘制饼图
+                data.forEach((value, i) => {
+                    const sliceAngle = (value / 100) * 2 * Math.PI;
+                    
+                    // 绘制扇形
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY);
+                    ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+                    ctx.closePath();
+                    
+                    ctx.fillStyle = colors[i];
+                    ctx.fill();
+                    
+                    ctx.strokeStyle = borderColors[i];
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    
+                    // 绘制标签
+                    const midAngle = startAngle + sliceAngle / 2;
+                    const labelRadius = radius * 1.1;
+                    const labelX = centerX + Math.cos(midAngle) * labelRadius;
+                    const labelY = centerY + Math.sin(midAngle) * labelRadius;
+                    
+                    // 绘制标签线
+                    ctx.beginPath();
+                    ctx.moveTo(centerX + Math.cos(midAngle) * radius, centerY + Math.sin(midAngle) * radius);
+                    ctx.lineTo(labelX, labelY);
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                    
+                    // 绘制标签文本
+                    ctx.font = 'bold 16px Arial';
+                    ctx.fillStyle = '#fff';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    
+                    // 根据位置调整文本对齐方式
+                    if (midAngle > Math.PI / 2 && midAngle < 3 * Math.PI / 2) {
+                        ctx.textAlign = 'right';
+                    } else {
+                        ctx.textAlign = 'left';
+                    }
+                    
+                    ctx.fillText(`${labels[i]} (${value}%)`, 
+                                 labelX + (Math.cos(midAngle) * 20), 
+                                 labelY + (Math.sin(midAngle) * 20));
+                    
+                    startAngle += sliceAngle;
+                });
+                
+                // 重置起始角度
+                startAngle = -Math.PI / 2;
+            }
+            
+            // 添加动画效果
+            let animationProgress = 0;
+            const animationDuration = 1000; // 1秒
+            const startTime = Date.now();
+            
+            function animateChart() {
+                const currentTime = Date.now();
+                const elapsed = currentTime - startTime;
+                animationProgress = Math.min(elapsed / animationDuration, 1);
+                
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 绘制饼图（带动画）
+                let cumulativeAngle = -Math.PI / 2;
+                
+                data.forEach((value, i) => {
+                    const sliceAngle = (value / 100) * 2 * Math.PI * animationProgress;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY);
+                    ctx.arc(centerX, centerY, radius, cumulativeAngle, cumulativeAngle + sliceAngle);
+                    ctx.closePath();
+                    
+                    ctx.fillStyle = colors[i];
+                    ctx.fill();
+                    
+                    ctx.strokeStyle = borderColors[i];
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    
+                    // 只在动画结束时绘制标签
+                    if (animationProgress === 1) {
+                        const midAngle = cumulativeAngle + sliceAngle / 2;
+                        const labelRadius = radius * 1.1;
+                        const labelX = centerX + Math.cos(midAngle) * labelRadius;
+                        const labelY = centerY + Math.sin(midAngle) * labelRadius;
+                        
+                        ctx.beginPath();
+                        ctx.moveTo(centerX + Math.cos(midAngle) * radius, centerY + Math.sin(midAngle) * radius);
+                        ctx.lineTo(labelX, labelY);
+                        ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                        
+                        ctx.font = 'bold 16px Arial';
+                        ctx.fillStyle = '#fff';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        
+                        if (midAngle > Math.PI / 2 && midAngle < 3 * Math.PI / 2) {
+                            ctx.textAlign = 'right';
+                        } else {
+                            ctx.textAlign = 'left';
+                        }
+                        
+                        ctx.fillText(`${labels[i]} (${value}%)`, 
+                                     labelX + (Math.cos(midAngle) * 20), 
+                                     labelY + (Math.sin(midAngle) * 20));
+                    }
+                    
+                    cumulativeAngle += sliceAngle;
+                });
+                
+                if (animationProgress < 1) {
+                    requestAnimationFrame(animateChart);
+                }
+            }
+            
+            // 初始化
+            animateChart();
+            
+            // 添加悬停效果
+            canvas.addEventListener('mousemove', function(e) {
+                const rect = canvas.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                
+                const dx = mouseX - centerX;
+                const dy = mouseY - centerY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance <= radius) {
+                    canvas.style.cursor = 'pointer';
+                } else {
+                    canvas.style.cursor = 'default';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

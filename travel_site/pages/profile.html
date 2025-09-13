@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 心途旅行</title>
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body data-page="profile">
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="../index.html" class="logo">心途旅行</a>
+            <nav class="nav">
+                <div class="nav-links">
+                    <a href="../destinations/destinations.html">目的地</a>
+                    <a href="deals.html">优惠</a>
+                    <a href="stories.html">故事</a>
+                    <a href="about.html">关于</a>
+                    <a href="contact.html">联系</a>
+                    <a href="favorites.html">收藏</a>
+                    <a href="orders.html">订单</a>
+                    <a href="#" id="authLink">登录</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <div class="avatar-circle">
+                            <span id="userInitial">U</span>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <h1 id="userName">用户名</h1>
+                        <p id="userEmail">user@example.com</p>
+                        <p class="user-stats">
+                            <span>收藏 <strong id="favoriteCount">0</strong></span>
+                            <span>订单 <strong id="orderCount">0</strong></span>
+                            <span>注册时间 <strong id="registerDate">-</strong></span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="profile-content">
+                    <div class="profile-section">
+                        <h2>个人资料</h2>
+                        <form id="profileForm" class="profile-form">
+                            <div class="form-group">
+                                <label for="profileUsername">用户名</label>
+                                <input type="text" id="profileUsername" name="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileEmail">邮箱</label>
+                                <input type="email" id="profileEmail" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profilePhone">手机号</label>
+                                <input type="tel" id="profilePhone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileBio">个人简介</label>
+                                <textarea id="profileBio" name="bio" rows="3" placeholder="介绍一下自己..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">保存修改</button>
+                        </form>
+                    </div>
+
+                    <div class="profile-section">
+                        <h2>修改密码</h2>
+                        <form id="passwordForm" class="profile-form">
+                            <div class="form-group">
+                                <label for="currentPassword">当前密码</label>
+                                <input type="password" id="currentPassword" name="currentPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">新密码</label>
+                                <input type="password" id="newPassword" name="newPassword" required minlength="6">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">确认新密码</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6">
+                            </div>
+                            <button type="submit" class="btn btn-secondary">修改密码</button>
+                        </form>
+                    </div>
+
+                    <div class="profile-section">
+                        <h2>账户操作</h2>
+                        <div class="account-actions">
+                            <button onclick="exportUserData()" class="btn btn-outline">导出数据</button>
+                            <button onclick="clearUserData()" class="btn btn-outline">清除数据</button>
+                            <button onclick="logout()" class="btn btn-danger">退出登录</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+	<script src="../assets/script.js"></script>
+    <script>
+        // 个人资料页面逻辑
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = currentUser()
+            if(!user) {
+                alert('请先登录')
+                location.href = 'login.html'
+                return
+            }
+
+            // 加载用户信息
+            loadUserProfile()
+            setupProfileForms()
+        })
+
+        function loadUserProfile() {
+            const user = currentUser()
+            const userData = getUserData(user.id)
+            
+            // 更新页面显示
+            document.getElementById('userName').textContent = user.username || '用户'
+            document.getElementById('userEmail').textContent = user.email || user.phone || '未设置'
+            document.getElementById('userInitial').textContent = (user.username || 'U').charAt(0).toUpperCase()
+            document.getElementById('favoriteCount').textContent = userData.favorites ? userData.favorites.length : 0
+            document.getElementById('orderCount').textContent = userData.orders ? userData.orders.length : 0
+            document.getElementById('registerDate').textContent = user.registerTime ? 
+                new Date(user.registerTime).toLocaleDateString() : '-'
+
+            // 填充表单
+            document.getElementById('profileUsername').value = user.username || ''
+            document.getElementById('profileEmail').value = user.email || ''
+            document.getElementById('profilePhone').value = user.phone || ''
+            document.getElementById('profileBio').value = userData.profile.bio || ''
+        }
+
+        function setupProfileForms() {
+            // 个人资料表单
+            document.getElementById('profileForm').addEventListener('submit', function(e) {
+                e.preventDefault()
+                updateProfile()
+            })
+
+            // 密码修改表单
+            document.getElementById('passwordForm').addEventListener('submit', function(e) {
+                e.preventDefault()
+                changePassword()
+            })
+        }
+
+        function updateProfile() {
+            const user = currentUser()
+            const userData = getUserData(user.id)
+            
+            const formData = new FormData(document.getElementById('profileForm'))
+            const updates = {
+                username: formData.get('username'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                bio: formData.get('bio')
+            }
+
+            // 更新用户数据
+            userData.profile = { ...userData.profile, ...updates }
+            saveUserData(user.id, userData)
+
+            // 更新当前用户信息
+            const updatedUser = { ...user, ...updates }
+            storage.set('xt_user', updatedUser)
+
+            // 更新用户列表中的信息
+            const users = storage.get('xt_users', [])
+            const userIndex = users.findIndex(u => u.id === user.id)
+            if(userIndex !== -1) {
+                users[userIndex] = { ...users[userIndex], ...updates }
+                storage.set('xt_users', users)
+            }
+
+            showToast('个人资料已更新')
+            loadUserProfile()
+        }
+
+        function changePassword() {
+            const user = currentUser()
+            const users = storage.get('xt_users', [])
+            const userIndex = users.findIndex(u => u.id === user.id)
+            
+            if(userIndex === -1) {
+                showToast('用户不存在', 'error')
+                return
+            }
+
+            const formData = new FormData(document.getElementById('passwordForm'))
+            const currentPassword = formData.get('currentPassword')
+            const newPassword = formData.get('newPassword')
+            const confirmPassword = formData.get('confirmPassword')
+
+            // 验证当前密码
+            if(users[userIndex].pwd !== currentPassword) {
+                showToast('当前密码不正确', 'error')
+                return
+            }
+
+            // 验证新密码
+            if(newPassword !== confirmPassword) {
+                showToast('两次输入的新密码不一致', 'error')
+                return
+            }
+
+            if(newPassword.length < 6) {
+                showToast('新密码至少6位', 'error')
+                return
+            }
+
+            // 更新密码
+            users[userIndex].pwd = newPassword
+            storage.set('xt_users', users)
+
+            showToast('密码修改成功')
+            document.getElementById('passwordForm').reset()
+        }
+
+        function exportUserData() {
+            const user = currentUser()
+            const userData = getUserData(user.id)
+            
+            const exportData = {
+                user: user,
+                data: userData,
+                exportTime: new Date().toISOString()
+            }
+
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' })
+            const url = URL.createObjectURL(blob)
+            const a = document.createElement('a')
+            a.href = url
+            a.download = `travelx_user_data_${user.id}.json`
+            a.click()
+            URL.revokeObjectURL(url)
+
+            showToast('数据导出成功')
+        }
+
+        function clearUserData() {
+            if(confirm('确定要清除所有个人数据吗？此操作不可恢复！')) {
+                const user = currentUser()
+                if(user) {
+                    // 清除用户数据
+                    localStorage.removeItem(`xt_user_${user.id}`)
+                    
+                    // 清除收藏和订单
+                    const userData = getUserData(user.id)
+                    userData.favorites = []
+                    userData.orders = []
+                    saveUserData(user.id, userData)
+                    
+                    showToast('个人数据已清除')
+                    loadUserProfile()
+                }
+            }
+        }
+    </script>
+</body>
+</html>
