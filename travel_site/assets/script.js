@@ -704,10 +704,21 @@ function setupAuthPages(){
         alert('登录成功！欢迎回来！')
         const back = sessionStorage.getItem('back_url')
         if(back){ 
+          console.log('跳转到返回URL:', back)
           sessionStorage.removeItem('back_url')
           window.location.href = back 
         } else { 
-          window.location.href = '../index.html' 
+          const homeUrl = '../../index.html'
+          console.log('跳转到首页:', homeUrl)
+          console.log('当前页面URL:', window.location.href)
+          
+          // 使用多种方法确保跳转成功
+          try {
+            window.location.href = homeUrl
+          } catch (e) {
+            console.error('跳转失败，尝试备用方法:', e)
+            window.location.assign(homeUrl)
+          }
         }
       }
       else { 
