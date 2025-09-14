@@ -87,11 +87,22 @@
 				const backUrl = sessionStorage.getItem('back_url');
 				if (backUrl) {
 					// 如果有返回URL，跳转回原页面
+					console.log('跳转到返回URL:', backUrl);
 					sessionStorage.removeItem('back_url');
 					window.location.href = backUrl;
 				} else {
-					// 否则跳转首页
-					window.location.href = "../../index.html";
+					// 否则跳转首页 - 使用绝对路径确保跳转成功
+					const homeUrl = "../../index.html";
+					console.log('跳转到首页:', homeUrl);
+					console.log('当前页面URL:', window.location.href);
+					
+					// 使用多种方法确保跳转成功
+					try {
+						window.location.href = homeUrl;
+					} catch (e) {
+						console.error('跳转失败，尝试备用方法:', e);
+						window.location.assign(homeUrl);
+					}
 				}
 			} else {
 				alert("密码错误！");
@@ -101,6 +112,5 @@
 	<script src="../assets/script.js"></script>
 </body>
 </html>
-
 
 
