@@ -4,6 +4,7 @@
 
 ### 项目名称
 心途旅行 (XinTu Travel)
+网站https://yjcc0498-afk.github.io/xingtu_travel/
 
 ### 项目主题
 现代化旅游网站 - 提供目的地推荐、特惠套餐、用户管理、订单处理等完整的旅游服务功能
