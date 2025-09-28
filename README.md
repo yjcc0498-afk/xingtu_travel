@@ -9,7 +9,7 @@
 现代化旅游网站 - 提供目的地推荐、特惠套餐、用户管理、订单处理等完整的旅游服务功能
 
 ### 开发周期
-- **项目启动**: 2024年9月
+- **项目启动**: 2025年9月
 - **需求分析**: 1h
 - **设计规划**: 1h  
 - **开发实现**: 3天
@@ -796,46 +796,7 @@ jobs:
 - **JavaScript**: 使用ES6+语法，添加必要注释
 - **提交信息**: 使用清晰的英文描述
 
-## 许可证
 
-MIT License
-
-Copyright (c) 2024 心途旅行
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-## 联系方式
-
-### 技术支持
-- **邮箱**: support@xintutravel.com
-- **电话**: 400-888-0000
-- **工作时间**: 周一至周五 9:00-18:00
-
-### 项目维护者
-- **开发者**: [你的名字]
-- **GitHub**: [你的GitHub链接]
-- **邮箱**: [你的邮箱]
-
-### 社区支持
-- **GitHub Issues**: [项目Issues页面]
-- **讨论区**: [GitHub Discussions]
-- **文档**: [项目Wiki]
 
 ---
 
